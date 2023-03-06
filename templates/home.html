@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 id="username" class="text-center mt-4 headline">Hi {{ request.user }}<sub><a href="{% url "logout" %}">(Logout)</a></sub></h1>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card">
+        <h5 class="mt-3 text-center">Total Calories Consumed Today</h5>
+        <p class="text-center">{{ total_calorie }}</p> 
+    </div>
+    </div>
+    <div class="col-lg-6">
+      <div class=" card">
+        <h5 class="mt-3 text-center">Calorie Goal For Today</h5>
+        <p class="text-center">{{ calorie_goal }}</p> 
+  </div>
+    </div>
+  </div>
+  
+</div>          
+  <p style="font-size:22px"> 
+      {% if calorie_goal_status > 0 %}
+      You need  {{ calorie_goal_status }} calories more to reach your goal 
+      {% elif calorie_goal == 0 %}
+      <a href="{% url "profile" %}"> Enter your calorie goal for the day </a>
+      {% else %}
+      You surpassed your goal by {{ over_calorie }} calories 
+      {% endif %} </p>
+
+        </div>
+      </div>
+
+<h1 class="headline text-center mt-auto mb-auto">All Food Consumed Today </h1>
+<div class="container table-responsive py-5"> 
+<table class="table table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr class="text-center">
+      <th scope="col">Food</th>
+      <th scope="col">Calorie</th>
+      <th scope="col">quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+ 
+    {% for food in food_selected_today %}
+    <tr class="text-center">
+      <td> {{ food.food_name }}</td>
+      <td> {{ food.calorie_count }}</td>
+      <td> {{ food.quantity }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+
+
+{% endblock content %}

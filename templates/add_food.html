@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+<div class="row">
+                <h1 class="headline">Add Food</h1>
+            </div>
+            <form method="POST" action="" class="login-form form-inline">
+              {% csrf_token %}
+              
+                {% for field in form %}
+                <h5 class="form-labels">
+                {{ field.label }}
+                </h5>
+                {{ field }}
+                 
+                {% endfor %}
+           
+                <input class="btn mt-2" type="submit" value="Add">
+
+            </form>
+           
+        </div>
+        
+    </div>
+    </div>
+    <div class="col-lg-6 ">
+    <div class="login">
+        <div class="login-screen">
+              <form method="get">
+                  <h1 class="headline">{{ myFilter.form }}</h1>
+                  <button class="btn mt-2" type="submit">Search </button>
+              </form> 
+        </div>
+    </div>
+
+        <h1 class="headline"> All Food Items </h1>
+        <table class="text-center">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Food Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for food in food_items %}
+                <tr>
+                    <td>{{ food.name }}</td>
+
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>  
+    </div>
+</div>
+</div>
+{% endblock content %}
